@@ -8,4 +8,8 @@ public class Team {
     private int ties;
     private int defeat;
 
+    public Team(String name, Game[] games) {
+        this.name = name;
+        this.games = games;
+    }
 }

@@ -10,4 +10,12 @@ public class Game {
     private int awayTeamGoals;
     private LocalDateTime dateTime;
 
+    public Game(Team homeTeam, int homeTeamGoals, Team awayTeam, int awayTeamGoals, LocalDateTime dateTime) {
+        this.homeTeam = homeTeam;
+        this.homeTeamGoals = homeTeamGoals;
+        this.awayTeam = awayTeam;
+        this.awayTeamGoals = awayTeamGoals;
+        this.dateTime = dateTime;
+    }
+
 }
