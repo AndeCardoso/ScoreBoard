@@ -1,21 +1,33 @@
 package entities;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Game {
-    private Team homeTeam;
+    private String homeTeam;
     private int homeTeamGoals;
-    private Team awayTeam;
+    private String awayTeam;
     private int awayTeamGoals;
-    private LocalDateTime dateTime;
+    private Date dateTime;
 
-    public Game(Team homeTeam, int homeTeamGoals, Team awayTeam, int awayTeamGoals, LocalDateTime dateTime) {
+    public Game(String homeTeam, int homeTeamGoals, String awayTeam, int awayTeamGoals, Date dateTime) {
         this.homeTeam = homeTeam;
         this.homeTeamGoals = homeTeamGoals;
         this.awayTeam = awayTeam;
         this.awayTeamGoals = awayTeamGoals;
         this.dateTime = dateTime;
     }
+
+    @Override
+    public String toString() {
+        return
+                 dateTime + " " +
+                 homeTeam + " " +
+                 homeTeamGoals +
+                 " X " +
+                 awayTeamGoals + " " +
+                 awayTeam
+                 ;
+    }
+
 
 }

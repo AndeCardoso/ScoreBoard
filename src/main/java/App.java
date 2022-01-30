@@ -1,7 +1,9 @@
-import services.FileMananger;
+
+import services.FileManager;
 
 public class App {
     public static void main(String[] args) {
-        FileMananger.readAllFile();
+        FileManager file = new FileManager();
+        System.out.println(file.readAllFile());
     }
 }
