@@ -15,7 +15,7 @@ public class FileManager {
 
     final String GAME_RESULTS = "src/resources/input/game_results.csv";
 
-    public ArrayList<Game> readAllFile() {
+    public ArrayList<Game> readAllLines() {
         try {
             FileReader file = new FileReader(GAME_RESULTS);
             BufferedReader reader = new BufferedReader(file);
