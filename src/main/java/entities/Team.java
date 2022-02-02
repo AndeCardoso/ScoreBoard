@@ -1,9 +1,8 @@
 package entities;
-
 import lombok.*;
 import services.FileManager;
 
-import java.util.Objects;
+import java.util.ArrayList;
 import java.util.Set;
 
 @Getter
@@ -13,7 +12,7 @@ import java.util.Set;
 public class Team {
 
     private final String name;
-    private Set<Game> teamGames;
+    private ArrayList<Game> teamGames;
     private int victory;
     private int ties;
     private int defeat;
