@@ -1,21 +1,14 @@
 
 import entities.Game;
+import entities.Team;
 import services.FileManager;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.SortedSet;
 
 public class App {
     public static void main(String[] args) {
-        FileManager file = new FileManager();
-        ArrayList<Game> list = file.readAllLines();
-        Collections.sort(list, (cur, nex) -> {
-            if (cur.getDateTime() == null || nex.getDateTime() == null) {
-                return 0;
-            }
-            return cur.getDateTime().compareTo(nex.getDateTime());
-        });
-        System.out.println("after" + list);
+        Team team1 = new Team("Santos");
+        team1.getData();
     }
 }

@@ -4,18 +4,23 @@ import entities.Game;
 
 import java.io.*;
 import java.text.ParseException;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Objects;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import java.util.Set;
 
 public class FileManager {
-    private ArrayList<Game> GamesOfFile = new ArrayList<>();
+    private static final Set<Game> GamesOfFile = new HashSet<>();
 
-    final String GAME_RESULTS = "src/resources/input/game_results.csv";
+    static final String GAME_RESULTS = "src/resources/input/game_results.csv";
 
-    public ArrayList<Game> readAllLines() {
+    public static Set<Game> getByTeamName(String name) {
+        Set<Game> gamesByTeam = (Set<Game>) GamesOfFile.stream()
+                .filter(games -> games.getHomeTeam().equals(name) || games.getAwayTeam().equals(name));
+        return gamesByTeam;
+    }
+
+    public static Set<Game> readAllLines() {
         try {
             FileReader file = new FileReader(GAME_RESULTS);
             BufferedReader reader = new BufferedReader(file);
@@ -35,19 +40,18 @@ public class FileManager {
         return null;
     }
 
-    private Game getLine(String lineOfFile) {
+    private static Game getLine(String lineOfFile) {
         try {
             if(!Objects.equals(lineOfFile, "")){
-                String[] splittedData = lineOfFile.split(";");
-                SimpleDateFormat dateParser = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
-                Game gameLine = new Game(
-                        (splittedData[0]),
-                        (Integer.parseInt(splittedData[2])),
-                        (splittedData[1]),
-                        (Integer.parseInt(splittedData[3])),
-                        (dateParser.parse(splittedData[4]))
+                String[] splitData = lineOfFile.split(";");
+                SimpleDateFormat dateParser = new SimpleDateFormat("yy-MM-dd");
+                return new Game(
+                        (splitData[0]),
+                        (Integer.parseInt(splitData[2])),
+                        (splitData[1]),
+                        (Integer.parseInt(splitData[3])),
+                        (dateParser.parse(splitData[4]))
                 );
-                return gameLine;
 
             } else {
                 return null;
@@ -56,5 +60,9 @@ public class FileManager {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void writeInFiles() {
+        
     }
 }
