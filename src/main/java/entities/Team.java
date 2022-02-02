@@ -49,7 +49,7 @@ public class Team {
     }
 
     private void getAwayTeam(Game game) {
-        if(game.getHomeTeam().equalsIgnoreCase(this.name)) {
+        if(game.getAwayTeam().equalsIgnoreCase(this.name)) {
             this.goalsScore += game.getAwayTeamGoals();
             if(game.getHomeTeamGoals() < game.getAwayTeamGoals()) {
                 this.victory += 1;
