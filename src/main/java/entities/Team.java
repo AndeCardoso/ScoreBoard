@@ -18,12 +18,14 @@ public class Team {
     private int ties;
     private int defeat;
     private int goalsScore;
+    private int points;
 
     public void getData() {
         this.teamGames = FileManager.getByTeamName(this.name);
         for (Game game : teamGames) {
             hasTie(game);
         }
+        this.calculatePoints();
         System.out.println(this);
     }
 
@@ -57,5 +59,8 @@ public class Team {
                 this.defeat += 1;
             }
         }
+    }
+    private void calculatePoints(){
+        this.points = (this.getVictory()*3 + this.getTies());
     }
 }
