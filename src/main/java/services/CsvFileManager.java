@@ -17,8 +17,6 @@ public class CsvFileManager {
       while ((line = bufferedReader.readLine()) != null) {
         System.out.println(line);
       }
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
     } catch (IOException e) {
       e.printStackTrace();
     }
