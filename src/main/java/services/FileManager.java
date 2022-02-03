@@ -11,7 +11,8 @@ import java.text.SimpleDateFormat;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class FileManager {
-    private static final ArrayList<Game> GamesOfFile = new ArrayList<>();
+
+    public static final ArrayList<Game> GamesOfFile = new ArrayList<>();
 
     static final String FILE_NAME = "src/resources/input/game_results.csv";
 

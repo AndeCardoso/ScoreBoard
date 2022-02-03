@@ -1,13 +1,10 @@
 package entities;
 import lombok.*;
 import services.FileManager;
-
 import java.util.ArrayList;
-import java.util.Set;
 
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
 public class Team {
 

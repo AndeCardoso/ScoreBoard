@@ -1,11 +1,12 @@
 package entities;
 
 import lombok.*;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 public class Game {
     private String homeTeam;
@@ -14,4 +15,15 @@ public class Game {
     private int awayTeamGoals;
     private Date date;
 
+    @Override
+    public String toString() {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        return  format.format(date) + ": " +
+                homeTeam +  " " +
+                homeTeamGoals + " " +
+                "x " +
+                awayTeamGoals + " " +
+                awayTeam + "\n"
+                ;
+    }
 }
