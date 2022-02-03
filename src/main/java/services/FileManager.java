@@ -5,6 +5,7 @@ import entities.Game;
 import java.io.*;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 import java.text.SimpleDateFormat;
 
@@ -12,7 +13,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class FileManager {
 
-    public static final ArrayList<Game> GamesOfFile = new ArrayList<>();
+    public static ArrayList<Game> GamesOfFile = new ArrayList<>();
 
     static final String FILE_NAME = "src/resources/input/game_results.csv";
 
@@ -33,7 +34,13 @@ public class FileManager {
             while ((line = reader.readLine()) != null) {
                 GamesOfFile.add(getLine(line));
             }
-        } catch (IOException e) {
+            GamesOfFile.sort((cur, nex) -> {
+                if (cur.getDate() == null || nex.getDate() == null) {
+                    return 0;
+                }
+                return cur.getDate().compareTo(nex.getDate());
+            });
+        }catch (IOException e) {
             e.printStackTrace();
         }
     }
