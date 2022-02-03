@@ -19,6 +19,18 @@ public class Team {
     private int goalsScore;
     private int points;
 
+    @Override
+    public String toString() {
+        return  name + "\n" +
+                "- games played: " + teamGames.size() + "\n" +
+                "- victory: " + victory + "\n" +
+                "- ties: " + ties + "\n" +
+                "- defeat: " + defeat + "\n" +
+                "- goals score: " + goalsScore + "\n" +
+                "- points: " + points + "\n"
+                ;
+    }
+
     public void getData() {
         this.teamGames = FileManager.getByTeamName(this.name);
         for (Game game : teamGames) {

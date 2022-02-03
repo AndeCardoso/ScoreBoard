@@ -40,8 +40,8 @@ public class FileManager {
     private static Game getLine(String lineOfFile) {
         try {
             if(!Objects.equals(lineOfFile, "")){
-                String[] splitData = lineOfFile.split(";");
-                SimpleDateFormat dateParser = new SimpleDateFormat("yy-MM-dd");
+                String[] splitData = lineOfFile.split(",");
+                SimpleDateFormat dateParser = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
                 return new Game(
                         (splitData[0]),
                         (Integer.parseInt(splitData[2])),
