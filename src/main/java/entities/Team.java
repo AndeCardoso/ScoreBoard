@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 @Getter
 @Setter
+@ToString
 @RequiredArgsConstructor
 public class Team {
 
@@ -16,16 +17,14 @@ public class Team {
     private int goalsScore;
     private int points;
 
-    @Override
-    public String toString() {
-        return  name + "\n" +
-                "- games played: " + teamGames.size() + "\n" +
-                "- victory: " + victory + "\n" +
-                "- ties: " + ties + "\n" +
-                "- defeat: " + defeat + "\n" +
-                "- goals score: " + goalsScore + "\n" +
-                "- points: " + points + "\n"
-                ;
+    private void printInfos() {
+        System.out.print(name + "\n" +
+                "- Games played: " + teamGames.size() + "\n" +
+                "- Victory: " + victory + "\n" +
+                "- Ties: " + ties + "\n" +
+                "- Defeat: " + defeat + "\n" +
+                "- Goals score: " + goalsScore + "\n" +
+                "- Points: " + points + "\n");
     }
 
     public void getData() {
@@ -34,7 +33,7 @@ public class Team {
             hasTie(game);
         }
         this.calculatePoints();
-        System.out.println(this);
+        printInfos();
     }
 
     private void hasTie(Game game) {
@@ -68,6 +67,7 @@ public class Team {
             }
         }
     }
+
     private void calculatePoints(){
         this.points = (this.getVictory()*3 + this.getTies());
     }

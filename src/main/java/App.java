@@ -9,9 +9,7 @@ public class App {
 
 //        CsvFileManager.readFile();
 //        CsvFileManager.convertCsvToList();
-        FileManager.readAllLines();
-        ;
-        System.out.println(FileManager.GamesOfFile);
+        System.out.println(FileManager.GameList);
         Team team = new Team("Grêmio");
         team.getData();
     }

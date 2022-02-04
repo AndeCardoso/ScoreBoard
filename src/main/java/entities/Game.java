@@ -4,10 +4,12 @@ import lombok.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 @Getter
 @Setter
 @AllArgsConstructor
+@EqualsAndHashCode
 public class Game {
     private String homeTeam;
     private int homeTeamGoals;

@@ -4,24 +4,23 @@ import entities.Game;
 
 import java.io.*;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Objects;
+import java.util.*;
 import java.text.SimpleDateFormat;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class FileManager {
 
-    public static ArrayList<Game> GamesOfFile = new ArrayList<>();
+    public static List<Game> GameList;
+    public static Set<Game> GamesOfFile = new HashSet<>();
 
     static final String FILE_NAME = "src/resources/input/game_results.csv";
 
     public static ArrayList<Game> getByTeamName(String name) {
         readAllLines();
         ArrayList<Game> listGamesByTeam = new ArrayList<>();
-        for (Game game : GamesOfFile) {
-            if(Objects.equals(game.getHomeTeam(), name) || Objects.equals(game.getAwayTeam(), name)){
+        for (Game game : GameList) {
+            if(game.getHomeTeam().equalsIgnoreCase(name) || game.getAwayTeam().equalsIgnoreCase(name)){
                 listGamesByTeam.add(game);
             }
         }
@@ -34,12 +33,9 @@ public class FileManager {
             while ((line = reader.readLine()) != null) {
                 GamesOfFile.add(getLine(line));
             }
-            GamesOfFile.sort((cur, nex) -> {
-                if (cur.getDate() == null || nex.getDate() == null) {
-                    return 0;
-                }
-                return cur.getDate().compareTo(nex.getDate());
-            });
+            GameList = new ArrayList<>(GamesOfFile);
+            GameList.sort(FileManager::compareDate);
+            System.out.println(GameList);
         }catch (IOException e) {
             e.printStackTrace();
         }
@@ -65,6 +61,13 @@ public class FileManager {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private static int compareDate(Game cur, Game nex) {
+        if (cur.getDate() == null || nex.getDate() == null) {
+            return 0;
+        }
+        return cur.getDate().compareTo(nex.getDate());
     }
 
     public void writeInFiles() {
