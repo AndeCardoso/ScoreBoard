@@ -84,7 +84,7 @@ public class FileManager {
             team.getTeamGames().add(game);
             agrupamento.put(name, team);
 
-            String name2 = game.getHomeTeam();
+            String name2 = game.getAwayTeam();
 
             Team team2 = agrupamento.getOrDefault(name2, new Team(name2));
             team2.getTeamGames().add(game);
