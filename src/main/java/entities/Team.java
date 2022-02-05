@@ -2,6 +2,7 @@ package entities;
 import lombok.*;
 import services.FileManager;
 import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 public class Team {
 
     private final String name;
-    private ArrayList<Game> teamGames;
+    private List<Game> teamGames = new ArrayList<Game>();
     private int victory;
     private int ties;
     private int defeat;
