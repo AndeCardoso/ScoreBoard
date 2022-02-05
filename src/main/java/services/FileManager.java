@@ -1,6 +1,7 @@
 package services;
 
 import entities.Game;
+import entities.Team;
 
 import java.io.*;
 import java.text.ParseException;
@@ -72,5 +73,23 @@ public class FileManager {
 
     public void writeInFiles() {
         
+    }
+
+    public static void agrupamentoPorIteracao() {
+        Map<String, Team> agrupamento = new HashMap<>();
+        for (Game game : GameList) {
+            String name = game.getHomeTeam();
+
+            Team team = agrupamento.getOrDefault(name, new Team(name));
+            team.getTeamGames().add(game);
+            agrupamento.put(name, team);
+
+            String name2 = game.getHomeTeam();
+
+            Team team2 = agrupamento.getOrDefault(name2, new Team(name2));
+            team2.getTeamGames().add(game);
+            agrupamento.put(name2, team2);
+        }
+        System.out.println(agrupamento);
     }
 }
