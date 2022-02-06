@@ -29,7 +29,7 @@ public class Team {
     }
 
     public void getData() {
-        this.teamGames = FileManager.getByTeamName(this.name);
+//        this.teamGames = FileManager.getByTeamName(this.name);
         for (Game game : teamGames) {
             hasTie(game);
         }
