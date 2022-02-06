@@ -1,8 +1,12 @@
 package services;
 
+import entities.Game;
+import entities.Team;
+
 import java.io.*;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class FileCreator {
 
@@ -10,35 +14,38 @@ public class FileCreator {
     private static final String TEAM_FILE_HEADER = "File containing the matches for ";
     private static final String HEADER_FINAL_FILE = "Team;Victories;Ties;Losses;Points";
 
-    public static void createTeamFile(String teamName) {
+    public static void createAllFiles() {
+        FileManager.readAllLines();
+        FileManager.getChampionshipList();
+        FileCreator.createFinalFile();
+        Map<String, Team> teamsMap = FileManager.createTeams();
+        for (Team team : teamsMap.values()) {
+            FileCreator.createTeamFile(team.getName());
+        }
+    }
+
+    private static void createTeamFile(String teamName) {
         try {
-            File teamFile = new File(OUTPUT_FILE_PATH + teamName + ".txt");
+            List<Game> list = new ArrayList<>(FileManager.createTeams().get(teamName).getTeamGames());
             FileWriter myWriter = new FileWriter(OUTPUT_FILE_PATH + teamName + ".txt");
-            if (teamFile.createNewFile()) {
-                System.out.println("File created: " + teamFile.getName());
-            } else {
-                System.out.println("File already exists.");
-            }
+            myWriter.write(TEAM_FILE_HEADER + teamName + ".\n\n");
+            list.forEach(line -> {
+                try {
+                    myWriter.write(String.valueOf(line));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+            myWriter.close();
+            System.out.println("Successfully wrote to the file: " + OUTPUT_FILE_PATH + teamName + ".txt.");
+
         } catch (IOException e) {
             System.out.println("A error occurred when creating the file.");
             e.printStackTrace();
         }
     }
 
-    public static void writeTeamFile(String teamName) {
-        try {
-            FileWriter myWriter = new FileWriter(OUTPUT_FILE_PATH + teamName + ".txt");
-            myWriter.write(TEAM_FILE_HEADER + teamName + ".\n\n");
-            myWriter.write(String.valueOf(FileManager.createTeams().get(teamName).getTeamGames()));
-            myWriter.close();
-            System.out.println("Successfully wrote to the file: " + OUTPUT_FILE_PATH + teamName + ".txt.");
-        } catch (IOException e) {
-            System.out.println("A writing error occurred.");
-            e.printStackTrace();
-        }
-    }
-
-    public static void createFinalFile()  {
+    private static void createFinalFile()  {
         try {
             List<String> list = FileManager.getChampionshipList();
             FileWriter myWriter = new FileWriter(OUTPUT_FILE_PATH + "FinalFile.csv");
