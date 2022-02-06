@@ -12,6 +12,6 @@ public class App {
             FileCreator.createFile(team.getName());
             FileCreator.writeInFiles(team.getName());
         }
-        FileManager.getChampionshipList();
+        FileCreator.createClassification();
     }
 }
