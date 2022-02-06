@@ -17,17 +17,6 @@ public class FileManager {
 
     static final String FILE_NAME = "src/resources/input/game_results.csv";
 
-//    public static ArrayList<Game> getByTeamName(String name) {
-//        readAllLines();
-//        ArrayList<Game> listGamesByTeam = new ArrayList<>();
-//        for (Game game : GameList) {
-//            if(game.getHomeTeam().equalsIgnoreCase(name) || game.getAwayTeam().equalsIgnoreCase(name)){
-//                listGamesByTeam.add(game);
-//            }
-//        }
-//        return listGamesByTeam;
-//    }
-
     public static void readAllLines() {
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME, UTF_8))) {
             String line;
@@ -45,8 +34,8 @@ public class FileManager {
     private static Game getLine(String lineOfFile) {
         try {
             if(!Objects.equals(lineOfFile, "")){
-                String[] splitData = lineOfFile.split(",");
-                SimpleDateFormat dateParser = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
+                String[] splitData = lineOfFile.split(";");
+                SimpleDateFormat dateParser = new SimpleDateFormat("yy-MM-dd");
                 return new Game(
                         (splitData[0]),
                         (Integer.parseInt(splitData[2])),
