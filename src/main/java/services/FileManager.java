@@ -11,10 +11,10 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class FileManager {
 
-    public static List<Game> GameList;
-    public static Set<Game> GamesOfFile = new HashSet<>();
+    private static List<Game> GameList;
+    private static Set<Game> GamesOfFile = new HashSet<>();
 
-    static final String FILE_NAME = "src/resources/input/game_results.csv";
+    private static final String FILE_NAME = "src/resources/input/game_results.csv";
 
     public static void readAllLines() {
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME, UTF_8))) {
@@ -82,20 +82,20 @@ public class FileManager {
 
     public static List<String> getChampionshipList(){
         Map<String, Team> teamsMap = FileManager.createTeams();
-        List<String> toWrite = new ArrayList<>();
+        List<String> orderedList = new ArrayList<>();
         teamsMap.values().stream().sorted(Comparator
                             .comparing(Team::getPoints, Comparator.reverseOrder())
                         .thenComparing(Team::getVictory, Comparator.reverseOrder())
                         .thenComparing(Team::getGoalsScore, Comparator.reverseOrder())
                         .thenComparing(Team::getName))
                 .forEach(value -> {
-                    toWrite.add(
+                    orderedList.add(
                                 value.getName().concat(";")
                         .concat(value.getVictory()+";")
                         .concat(value.getTies()+";")
                         .concat(value.getDefeat()+";")
                         .concat(value.getPoints()+""));
                 });
-        return toWrite;
+        return orderedList;
     }
 }

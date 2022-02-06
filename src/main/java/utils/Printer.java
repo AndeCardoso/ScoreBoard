@@ -55,7 +55,7 @@ public class Printer {
             " - Press 1 to generate/update ScoreBoard ordered by points:\n" +
             " - Press 2 to generate/update all teams files:\n" +
             " - Press 3 to choice a team for list information:\n" +
-            " - Press exit to close.\n"
+            " - Press exit to close the program.\n"
         );
         input = scan.next();
         switch (input) {
@@ -72,7 +72,7 @@ public class Printer {
                 System.exit(0);
                 break;
             default:
-                System.out.println("Wrong value! press any key to back...");
+                System.out.println("Wrong value! Press any key to return to the menu...");
                 String any = scan.next();
                 if(!Objects.equals(any, "")){
                     Menu();
@@ -87,7 +87,7 @@ public class Printer {
         Scanner scan = new Scanner(System.in);
         System.out.println(
                 "File with classification was generated!\n" +
-                "press any key to back..."
+                "Press any key to return to the menu..."
         );
         String any = scan.next();
         if(!Objects.equals(any, "")){
@@ -104,7 +104,7 @@ public class Printer {
         Scanner scan = new Scanner(System.in);
         System.out.println(
                 "All files with teams information was generated!\n" +
-                "press any key to back..."
+                "Press any key to return to the menu..."
         );
         String any = scan.next();
         if(!Objects.equals(any, "")){
@@ -118,7 +118,7 @@ public class Printer {
         while (!Objects.equals(name, "exit")) {
             System.out.println(
                     " - Insert the name of team you want know about:\n" +
-                    "*insert exit to back menu*"
+                    "*insert exit to return to the menu*"
             );
             name = scan.nextLine();
             if(!Objects.equals(name, "exit")) {
