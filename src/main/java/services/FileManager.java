@@ -88,6 +88,11 @@ public class FileManager {
     }
 
     public static void getChampionshipList(){
-
+        Map<String, Team> teamsMap = FileManager.createTeams();
+        teamsMap.values().stream().sorted(Comparator.comparing(Team::getPoints, Comparator.reverseOrder())
+                        .thenComparing(Team::getVictory, Comparator.reverseOrder())
+                        .thenComparing(Team::getGoalsScore, Comparator.reverseOrder())
+                        .thenComparing(Team::getName))
+                .forEach(System.out::println);
     }
 }
