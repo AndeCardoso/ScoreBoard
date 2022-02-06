@@ -96,4 +96,8 @@ public class FileManager {
         }
         System.out.println(teamsMap);
     }
+
+    public static void getChampionshipList(){
+
+    }
 }
