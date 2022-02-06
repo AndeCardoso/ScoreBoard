@@ -18,28 +18,26 @@ public class Team {
     private int goalsScore;
     private int points;
 
-    private void printInfos() {
-        System.out.print(name + "\n" +
-                "- Games played: " + teamGames.size() + "\n" +
-                "- Victory: " + victory + "\n" +
-                "- Ties: " + ties + "\n" +
-                "- Defeat: " + defeat + "\n" +
-                "- Goals score: " + goalsScore + "\n" +
-                "- Points: " + points + "\n");
+    public static void printInfos(Team team) {
+        System.out.print(team.name + "\n" +
+                "- Games played: " + team.teamGames.size() + "\n" +
+                "- Victory: " + team.victory + "\n" +
+                "- Ties: " + team.ties + "\n" +
+                "- Defeat: " + team.defeat + "\n" +
+                "- Goals score: " + team.goalsScore + "\n" +
+                "- Points: " + team.points + "\n");
     }
 
     public void getData() {
-//        this.teamGames = FileManager.getByTeamName(this.name);
         for (Game game : teamGames) {
             hasTie(game);
         }
         this.calculatePoints();
-        printInfos();
     }
 
     private void hasTie(Game game) {
-        if(game.getHomeTeamGoals() == game.getAwayTeamGoals()) {
-            this.goalsScore += game.getAwayTeamGoals();
+        if(game.getHomeTeamGoals() == game.getVisitorTeamGoals()) {
+            this.goalsScore += game.getVisitorTeamGoals();
             this.ties += 1;
         } else {
             getAwayTeam(game);
@@ -50,7 +48,7 @@ public class Team {
     private void getHomeTeam(Game game) {
         if(game.getHomeTeam().equalsIgnoreCase(this.name)) {
             this.goalsScore += game.getHomeTeamGoals();
-            if(game.getHomeTeamGoals() > game.getAwayTeamGoals()) {
+            if(game.getHomeTeamGoals() > game.getVisitorTeamGoals()) {
                 this.victory += 1;
             } else {
                 this.defeat += 1;
@@ -59,9 +57,9 @@ public class Team {
     }
 
     private void getAwayTeam(Game game) {
-        if(game.getAwayTeam().equalsIgnoreCase(this.name)) {
-            this.goalsScore += game.getAwayTeamGoals();
-            if(game.getHomeTeamGoals() < game.getAwayTeamGoals()) {
+        if(game.getVisitorTeam().equalsIgnoreCase(this.name)) {
+            this.goalsScore += game.getVisitorTeamGoals();
+            if(game.getHomeTeamGoals() < game.getVisitorTeamGoals()) {
                 this.victory += 1;
             } else {
                 this.defeat += 1;

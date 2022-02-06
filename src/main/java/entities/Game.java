@@ -12,8 +12,8 @@ import java.util.Date;
 public class Game {
     private String homeTeam;
     private int homeTeamGoals;
-    private String awayTeam;
-    private int awayTeamGoals;
+    private String visitorTeam;
+    private int visitorTeamGoals;
     private Date date;
 
     @Override
@@ -23,8 +23,8 @@ public class Game {
                 homeTeam +  " " +
                 homeTeamGoals + " " +
                 "x " +
-                awayTeamGoals + " " +
-                awayTeam + "\n"
+                visitorTeamGoals + " " +
+                visitorTeam + "\n"
                 ;
     }
 }

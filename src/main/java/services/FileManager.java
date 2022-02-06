@@ -2,7 +2,6 @@ package services;
 
 import entities.Game;
 import entities.Team;
-
 import java.io.*;
 import java.text.ParseException;
 import java.util.*;
@@ -25,7 +24,6 @@ public class FileManager {
             }
             GameList = new ArrayList<>(GamesOfFile);
             GameList.sort(FileManager::compareDate);
-            System.out.println(GameList);
         }catch (IOException e) {
             e.printStackTrace();
         }
@@ -60,48 +58,44 @@ public class FileManager {
         return cur.getDate().compareTo(nex.getDate());
     }
 
-    public void writeInFiles() {
-        
-    }
-
     public static Map<String, Team> createTeams() {
         Map<String, Team> teamsMap = new HashMap<>();
         for (Game game : GameList) {
-            String name = game.getHomeTeam();
+            String nameHomeTeam = game.getHomeTeam();
 
-            Team team = teamsMap.getOrDefault(name, new Team(name));
-            team.getTeamGames().add(game);
-            teamsMap.put(name, team);
+            Team homeTeam = teamsMap.getOrDefault(nameHomeTeam, new Team(nameHomeTeam));
+            homeTeam.getTeamGames().add(game);
+            teamsMap.put(nameHomeTeam, homeTeam);
 
-            String name2 = game.getAwayTeam();
+            String nameVisitorTeam = game.getVisitorTeam();
 
-            Team team2 = teamsMap.getOrDefault(name2, new Team(name2));
-            team2.getTeamGames().add(game);
-            teamsMap.put(name2, team2);
+            Team visitorTeam = teamsMap.getOrDefault(nameVisitorTeam, new Team(nameVisitorTeam));
+            visitorTeam.getTeamGames().add(game);
+            teamsMap.put(nameVisitorTeam, visitorTeam);
         }
 
         for (Team team : teamsMap.values()){
             team.getData();
         }
-        System.out.println(teamsMap);
         return teamsMap;
     }
 
     public static List<String> getChampionshipList(){
         Map<String, Team> teamsMap = FileManager.createTeams();
-        List<String> toPrint = new ArrayList<>();
-        teamsMap.values().stream().sorted(Comparator.comparing(Team::getPoints, Comparator.reverseOrder())
+        List<String> toWrite = new ArrayList<>();
+        teamsMap.values().stream().sorted(Comparator
+                            .comparing(Team::getPoints, Comparator.reverseOrder())
                         .thenComparing(Team::getVictory, Comparator.reverseOrder())
                         .thenComparing(Team::getGoalsScore, Comparator.reverseOrder())
                         .thenComparing(Team::getName))
                 .forEach(value -> {
-                    toPrint.add(value.getName().concat(";")
-                            .concat(String.valueOf(value.getVictory()+";")
-                            .concat(String.valueOf(value.getTies()+";"))
-                            .concat(String.valueOf(value.getDefeat()+";"))
-                            .concat(String.valueOf(value.getPoints()+";"))));
+                    toWrite.add(
+                                value.getName().concat(";")
+                        .concat(value.getVictory()+";")
+                        .concat(value.getTies()+";")
+                        .concat(value.getDefeat()+";")
+                        .concat(value.getPoints()+";"));
                 });
-        toPrint.forEach(System.out::println);
-        return toPrint;
+        return toWrite;
     }
 }

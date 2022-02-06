@@ -22,6 +22,9 @@ public class FileCreator {
         for (Team team : teamsMap.values()) {
             FileCreator.createTeamFile(team.getName());
         }
+        for (Team team : teamsMap.values()) {
+            Team.printInfos(team);
+        }
     }
 
     private static void createTeamFile(String teamName) {
