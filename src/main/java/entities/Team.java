@@ -11,7 +11,7 @@ import java.util.List;
 public class Team {
 
     private final String name;
-    private List<Game> teamGames = new ArrayList<Game>();
+    public List<Game> teamGames = new ArrayList<Game>();
     private int victory;
     private int ties;
     private int defeat;

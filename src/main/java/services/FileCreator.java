@@ -1,6 +1,9 @@
 package services;
 
+import entities.Team;
+
 import java.io.*;
+import java.util.Map;
 
 public class FileCreator {
 
@@ -23,7 +26,7 @@ public class FileCreator {
     public static void writeInFiles(String teamName) {
         try {
             FileWriter myWriter = new FileWriter(OUTPUT_FILE_PATH + teamName + ".txt");
-            myWriter.write("Write content here:");
+            myWriter.write(String.valueOf(FileManager.createTeams().get(teamName).teamGames));
             myWriter.close();
             System.out.println("Successfully wrote to the file: " + OUTPUT_FILE_PATH + teamName + ".txt.");
         } catch (IOException e) {

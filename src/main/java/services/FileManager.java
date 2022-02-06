@@ -75,7 +75,7 @@ public class FileManager {
         
     }
 
-    public static void createTeams() {
+    public static Map<String, Team> createTeams() {
         Map<String, Team> teamsMap = new HashMap<>();
         for (Game game : GameList) {
             String name = game.getHomeTeam();
@@ -95,6 +95,7 @@ public class FileManager {
             team.getData();
         }
         System.out.println(teamsMap);
+        return teamsMap;
     }
 
     public static void getChampionshipList(){
