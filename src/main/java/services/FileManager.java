@@ -89,10 +89,18 @@ public class FileManager {
 
     public static void getChampionshipList(){
         Map<String, Team> teamsMap = FileManager.createTeams();
+        List<String> toPrint = new ArrayList<>();
         teamsMap.values().stream().sorted(Comparator.comparing(Team::getPoints, Comparator.reverseOrder())
                         .thenComparing(Team::getVictory, Comparator.reverseOrder())
                         .thenComparing(Team::getGoalsScore, Comparator.reverseOrder())
                         .thenComparing(Team::getName))
-                .forEach(System.out::println);
+                .forEach(value -> {
+                    toPrint.add(value.getName().concat(";")
+                            .concat(String.valueOf(value.getVictory()+";")
+                            .concat(String.valueOf(value.getTies()+";"))
+                            .concat(String.valueOf(value.getDefeat()+";"))
+                            .concat(String.valueOf(value.getPoints()+";"))));
+                });
+        toPrint.forEach(System.out::println);
     }
 }

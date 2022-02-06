@@ -8,10 +8,10 @@ public class App {
     public static void main(String[] args) {
         FileManager.readAllLines();
         Map<String, Team> teamsMap = FileManager.createTeams();
-        for (Team team : teamsMap.values()) {
-            FileCreator.createFile(team.getName());
-            FileCreator.writeInFiles(team.getName());
-        }
+//        for (Team team : teamsMap.values()) {
+//            FileCreator.createFile(team.getName());
+//            FileCreator.writeInFiles(team.getName());
+//        }
         FileManager.getChampionshipList();
     }
 }
