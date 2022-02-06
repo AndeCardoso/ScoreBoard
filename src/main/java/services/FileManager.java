@@ -75,7 +75,7 @@ public class FileManager {
         
     }
 
-    public static void createTeams() {
+    public static Map<String, Team> createTeams() {
         Map<String, Team> teamsMap = new HashMap<>();
         for (Game game : GameList) {
             String name = game.getHomeTeam();
@@ -94,10 +94,19 @@ public class FileManager {
         for (Team team : teamsMap.values()){
             team.getData();
         }
-        System.out.println(teamsMap);
+        return teamsMap;
+//        System.out.println(teamsMap);
     }
 
     public static void getChampionshipList(){
-
+        List <Team> championshipList = new ArrayList<>();
+        Map<String, Team> teamsMap = FileManager.createTeams();
+        for (Team team : teamsMap.values()){
+            championshipList.add(team);
+        }
+        championshipList.stream().sorted(Comparator.comparing(Team::getPoints));
+        for (Team team:championshipList) {
+            System.out.println(team.getPoints());
+        }
     }
 }

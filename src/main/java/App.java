@@ -6,7 +6,7 @@ public class App {
 //        CsvFileManager.readFile();
 //        CsvFileManager.convertCsvToList();
         FileManager.readAllLines();
-        FileManager.createTeams();
+        FileManager.getChampionshipList();
 //        Team team = new Team("Grêmio");
 //        team.getData();
 
