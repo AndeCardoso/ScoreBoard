@@ -1,16 +1,15 @@
 package services;
 
-import entities.Team;
-
 import java.io.*;
-import java.util.Map;
+import java.util.Arrays;
 
 public class FileCreator {
 
-    static final String OUTPUT_FILE_PATH = "src/resources/output/";
-    static final String TEAM_FILE_HEADER = "File containing the matches for ";
+    private static final String OUTPUT_FILE_PATH = "src/resources/output/";
+    private static final String TEAM_FILE_HEADER = "File containing the matches for ";
+    private static final String HEADER_FINAL_FILE = "Team, Victories, Ties, Losses, Points";
 
-    public static void createFile(String teamName) {
+    public static void createTeamFile(String teamName) {
         try {
             File teamFile = new File(OUTPUT_FILE_PATH + teamName + ".txt");
             if (teamFile.createNewFile()) {
@@ -24,7 +23,7 @@ public class FileCreator {
         }
     }
 
-    public static void writeInFiles(String teamName) {
+    public static void writeTeamFile(String teamName) {
         try {
             FileWriter myWriter = new FileWriter(OUTPUT_FILE_PATH + teamName + ".txt");
             myWriter.write(TEAM_FILE_HEADER + teamName + ".\n\n");
@@ -32,6 +31,20 @@ public class FileCreator {
             myWriter.close();
             System.out.println("Successfully wrote to the file: " + OUTPUT_FILE_PATH + teamName + ".txt.");
         } catch (IOException e) {
+            System.out.println("A writing error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    public static void createFinalFile()  {
+        try {
+            FileWriter myWriter = new FileWriter(OUTPUT_FILE_PATH + "FinalFile.csv");
+            myWriter.write(HEADER_FINAL_FILE);
+            myWriter.write("\n");
+            myWriter.write(String.valueOf(FileManager.getChampionshipList()));
+            myWriter.close();
+            System.out.println("Successfully wrote to the file: " + OUTPUT_FILE_PATH + "FinalFile.csv");
+        }catch (IOException e) {
             System.out.println("A writing error occurred.");
             e.printStackTrace();
         }

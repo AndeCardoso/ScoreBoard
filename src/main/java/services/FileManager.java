@@ -87,7 +87,7 @@ public class FileManager {
         return teamsMap;
     }
 
-    public static void getChampionshipList(){
+    public static List<String> getChampionshipList(){
         Map<String, Team> teamsMap = FileManager.createTeams();
         List<String> toPrint = new ArrayList<>();
         teamsMap.values().stream().sorted(Comparator.comparing(Team::getPoints, Comparator.reverseOrder())
@@ -102,5 +102,6 @@ public class FileManager {
                             .concat(String.valueOf(value.getPoints()+";"))));
                 });
         toPrint.forEach(System.out::println);
+        return toPrint;
     }
 }
