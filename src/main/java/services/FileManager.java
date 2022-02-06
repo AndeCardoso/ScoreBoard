@@ -17,16 +17,16 @@ public class FileManager {
 
     static final String FILE_NAME = "src/resources/input/game_results.csv";
 
-    public static ArrayList<Game> getByTeamName(String name) {
-        readAllLines();
-        ArrayList<Game> listGamesByTeam = new ArrayList<>();
-        for (Game game : GameList) {
-            if(game.getHomeTeam().equalsIgnoreCase(name) || game.getAwayTeam().equalsIgnoreCase(name)){
-                listGamesByTeam.add(game);
-            }
-        }
-        return listGamesByTeam;
-    }
+//    public static ArrayList<Game> getByTeamName(String name) {
+//        readAllLines();
+//        ArrayList<Game> listGamesByTeam = new ArrayList<>();
+//        for (Game game : GameList) {
+//            if(game.getHomeTeam().equalsIgnoreCase(name) || game.getAwayTeam().equalsIgnoreCase(name)){
+//                listGamesByTeam.add(game);
+//            }
+//        }
+//        return listGamesByTeam;
+//    }
 
     public static void readAllLines() {
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME, UTF_8))) {
@@ -75,21 +75,25 @@ public class FileManager {
         
     }
 
-    public static void agrupamentoPorIteracao() {
-        Map<String, Team> agrupamento = new HashMap<>();
+    public static void createTeams() {
+        Map<String, Team> teamsMap = new HashMap<>();
         for (Game game : GameList) {
             String name = game.getHomeTeam();
 
-            Team team = agrupamento.getOrDefault(name, new Team(name));
+            Team team = teamsMap.getOrDefault(name, new Team(name));
             team.getTeamGames().add(game);
-            agrupamento.put(name, team);
+            teamsMap.put(name, team);
 
             String name2 = game.getAwayTeam();
 
-            Team team2 = agrupamento.getOrDefault(name2, new Team(name2));
+            Team team2 = teamsMap.getOrDefault(name2, new Team(name2));
             team2.getTeamGames().add(game);
-            agrupamento.put(name2, team2);
+            teamsMap.put(name2, team2);
         }
-        System.out.println(agrupamento);
+
+        for (Team team : teamsMap.values()){
+            team.getData();
+        }
+        System.out.println(teamsMap);
     }
 }
