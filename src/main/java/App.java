@@ -9,9 +9,10 @@ public class App {
         FileManager.readAllLines();
         Map<String, Team> teamsMap = FileManager.createTeams();
         for (Team team : teamsMap.values()) {
-            FileCreator.createFile(team.getName());
-            FileCreator.writeInFiles(team.getName());
+            FileCreator.createTeamFile(team.getName());
+            FileCreator.writeTeamFile(team.getName());
         }
-        FileCreator.createClassification();
+        FileManager.getChampionshipList();
+        FileCreator.createFinalFile();
     }
 }

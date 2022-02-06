@@ -101,6 +101,7 @@ public class FileManager {
                             .concat(String.valueOf(value.getDefeat()+";"))
                             .concat(String.valueOf(value.getPoints()+";"))));
                 });
+        toPrint.forEach(System.out::println);
         return toPrint;
     }
 }
