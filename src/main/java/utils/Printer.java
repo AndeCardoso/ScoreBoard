@@ -3,7 +3,6 @@ package utils;
 import entities.Team;
 import services.FileCreator;
 import services.FileManager;
-
 import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;

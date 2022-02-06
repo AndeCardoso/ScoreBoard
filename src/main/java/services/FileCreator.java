@@ -1,27 +1,15 @@
 package services;
 
 import entities.Game;
-import entities.Team;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class FileCreator {
 
     private static final String OUTPUT_FILE_PATH = "src/resources/output/";
     private static final String TEAM_FILE_HEADER = "File containing the matches for ";
     private static final String HEADER_FINAL_FILE = "Team;Victories;Ties;Losses;Points";
-
-    public static void createAllFiles() {
-        FileManager.readAllLines();
-        FileCreator.createFinalFile();
-        Map<String, Team> teamsMap = FileManager.createTeams();
-        for (Team team : teamsMap.values()) {
-            FileCreator.createTeamFile(team.getName());
-        }
-    }
 
     public static void createTeamFile(String teamName) {
         try {

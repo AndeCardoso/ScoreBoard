@@ -1,7 +1,6 @@
 package entities;
 
 import lombok.*;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

@@ -2,7 +2,6 @@ package entities;
 
 import lombok.*;
 import services.FileManager;
-
 import java.util.ArrayList;
 import java.util.List;
 
