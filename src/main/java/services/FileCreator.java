@@ -16,18 +16,14 @@ public class FileCreator {
 
     public static void createAllFiles() {
         FileManager.readAllLines();
-        FileManager.getChampionshipList();
         FileCreator.createFinalFile();
         Map<String, Team> teamsMap = FileManager.createTeams();
         for (Team team : teamsMap.values()) {
             FileCreator.createTeamFile(team.getName());
         }
-        for (Team team : teamsMap.values()) {
-            Team.printInfos(team);
-        }
     }
 
-    private static void createTeamFile(String teamName) {
+    public static void createTeamFile(String teamName) {
         try {
             List<Game> list = new ArrayList<>(FileManager.createTeams().get(teamName).getTeamGames());
             FileWriter myWriter = new FileWriter(OUTPUT_FILE_PATH + teamName + ".txt");
@@ -40,15 +36,13 @@ public class FileCreator {
                 }
             });
             myWriter.close();
-            System.out.println("Successfully wrote to the file: " + OUTPUT_FILE_PATH + teamName + ".txt.");
 
         } catch (IOException e) {
-            System.out.println("A error occurred when creating the file.");
             e.printStackTrace();
         }
     }
 
-    private static void createFinalFile()  {
+    public static void createFinalFile()  {
         try {
             List<String> list = FileManager.getChampionshipList();
             FileWriter myWriter = new FileWriter(OUTPUT_FILE_PATH + "FinalFile.csv");
@@ -63,9 +57,8 @@ public class FileCreator {
                 }
             });
             myWriter.close();
-            System.out.println("Successfully wrote to the file: " + OUTPUT_FILE_PATH + "FinalFile.csv");
+
         }catch (IOException e) {
-            System.out.println("A writing error occurred.");
             e.printStackTrace();
         }
     }

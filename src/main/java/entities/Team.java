@@ -1,6 +1,8 @@
 package entities;
 
 import lombok.*;
+import services.FileManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,14 +20,19 @@ public class Team {
     private int goalsScore;
     private int points;
 
-    public static void printInfos(Team team) {
-        System.out.print(team.name + "\n" +
-                "- Games played: " + team.teamGames.size() + "\n" +
-                "- Victory: " + team.victory + "\n" +
-                "- Ties: " + team.ties + "\n" +
-                "- Defeat: " + team.defeat + "\n" +
-                "- Goals score: " + team.goalsScore + "\n" +
-                "- Points: " + team.points + "\n");
+    public static void printInfos(String teamName) {
+        if(FileManager.createTeams().get(teamName) != null) {
+            Team team = FileManager.createTeams().get(teamName);
+            System.out.print(team.name + " -" +
+                    "\n Games played: " + team.teamGames.size() +
+                    "\n Victory: " + team.victory +
+                    "\n Ties: " + team.ties +
+                    "\n Losses: " + team.defeat +
+                    "\n Goals score: " + team.goalsScore +
+                    "\n Points: " + team.points + "\n\n");
+        } else {
+            System.out.println("Team name invalid!");
+        }
     }
 
     public void getData() {

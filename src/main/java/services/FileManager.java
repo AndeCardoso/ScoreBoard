@@ -94,7 +94,7 @@ public class FileManager {
                         .concat(value.getVictory()+";")
                         .concat(value.getTies()+";")
                         .concat(value.getDefeat()+";")
-                        .concat(value.getPoints()+";"));
+                        .concat(value.getPoints()+""));
                 });
         return toWrite;
     }
